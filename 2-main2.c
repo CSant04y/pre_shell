@@ -57,15 +57,24 @@ char *_getenv(char *name)
 }
 int  main(void)
 {
-	char buffer[32];
-	char *b = buffer;
-	size_t bufsize = 32;
+	char *buffer = NULL;
+	ssize_t chars;
+	size_t bufsize = 0;
 	char *s;
 
 	printf("prompt$ ");
-	getline(&b, &bufsize, stdin);
-	s = _getenv(b);
-	printf("%s\n", s);
+	while ((chars = getline(&buffer, &bufsize, stdin)))
+	{
+		if (chars == EOF)
+		{
+			printf("EOF");
+			return (0);
+		}
+		s = _getenv(buffer);
+		printf("%s\n", s);
+		buffer = NULL;
+		bufsize = 0;
+	}
 	return (0);
 }
 
