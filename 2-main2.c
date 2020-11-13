@@ -4,7 +4,7 @@
 #include <stdlib.h>
 extern char **environ;
 /**
-  * fuck me
+  * fuck this`
   */
 char *_strcpy(char *dest, char *src, int n)
 {
